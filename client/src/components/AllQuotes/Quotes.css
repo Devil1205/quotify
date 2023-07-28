@@ -1,0 +1,7 @@
+.allQuotes{
+    background-color: beige;
+}
+
+.allQuotes > div{
+    padding: 10px;
+}

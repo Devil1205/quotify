@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Spirax&display=swap');
+
+.home{
+    min-height: 100vh;
+    background: beige;
+    display: flex;
+    align-items: center;
+}
+
+.home > div{
+    /* width: 90%; */
+    max-width: 800px;
+    margin: auto;
+    font-family: 'Spirax', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.randomQuote{
+    width: fit-content;
+    margin: 50px auto;
+    padding: 10px;
+    background: #48485f;
+    border-radius: 13px;
+    box-shadow: 5px 7px 9px 0px black;
+    color: white;
+}
+
+.randomQuote div{
+    font-size: 50px;
+}
+
+.randomQuote h2{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+}
+
+.randomQuote div span{
+    color: red;
+    position: relative;
+    font-size: 30px;
+}
+
+.randomQuote div span{
+    top: -20px;
+}
