@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './Quotes.css'
 import '../Home/Home.css'
 
-function Quotes() {
+function Quotes({base_URL}) {
 
     const [quotes, setQuotes] = useState([]);
 
     const getQuotes = async () => {
-        const data = await fetch("http://localhost:5000/quotifyAPI/quotes");
+        const data = await fetch(base_URL+"/quotifyAPI/quotes");
         const dataJson = await data.json();
         setQuotes(dataJson);
     }

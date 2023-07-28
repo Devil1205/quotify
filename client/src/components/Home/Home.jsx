@@ -3,12 +3,12 @@ import './Home.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-function Home() {
+function Home({base_URL}) {
 
   const [quote, setQuote] = useState({});
 
   const getRandomQuote = async () => {
-    const data = await fetch("http://localhost:5000/quotifyAPI/", {
+    const data = await fetch(base_URL+"/quotifyAPI/", {
       method: "GET",
     });
     const dataJson = await data.json();
