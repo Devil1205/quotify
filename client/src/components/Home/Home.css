@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Spirax&display=swap');
 
 .home{
-    min-height: calc(100vh -80px);
+    min-height: calc(100vh - 80px);
     background: linear-gradient(45deg, black, transparent);
     display: flex;
     align-items: center;
