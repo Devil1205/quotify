@@ -13,7 +13,7 @@ function Home({base_URL}) {
     });
     const dataJson = await data.json();
     setQuote(dataJson);
-    console.log(dataJson);
+    // console.log(dataJson);
   }
 
   useEffect(() => {
@@ -28,13 +28,18 @@ function Home({base_URL}) {
           <div><span>❛❛</span>{quote.description}<span>❜❜</span></div>
           <h2>~ {quote.author}</h2>
         </div>
-        <div className="quoteButtons">
-          <Button className='me-2 my-2' variant="outlined" color="success" onClick={getRandomQuote}>
-            New Quote
+        <div className="quoteButtons text-center">
+          <Button className='me-2 my-2' variant="contained" color="success" onClick={getRandomQuote}>
+            Another Quote
           </Button>
           <Link to="/quotes">
-            <Button variant="outlined" color="primary">
+            <Button variant="contained" className='me-2 my-2' color="primary">
               All Quotes
+            </Button>
+          </Link>
+          <Link to="/new_quote">
+            <Button variant="contained" color="warning">
+              Add Quote
             </Button>
           </Link>
         </div>

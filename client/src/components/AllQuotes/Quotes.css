@@ -1,5 +1,6 @@
 .allQuotes{
-    background-color: beige;
+    /* background-color: beige; */
+    background: linear-gradient(45deg, black, transparent);
 }
 
 .allQuotes > div{

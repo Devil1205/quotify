@@ -1,0 +1,17 @@
+.newQuote{
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    align-items: center;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+
+#quoteForm{
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 90%;
+    align-items: center;
+}
