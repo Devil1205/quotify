@@ -6,3 +6,12 @@
 .allQuotes > div{
     padding: 10px;
 }
+
+.icons{
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 0px;
+    width: 100%;
+}

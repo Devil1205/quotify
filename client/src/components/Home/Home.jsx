@@ -38,7 +38,7 @@ function Home({base_URL}) {
             </Button>
           </Link>
           <Link to="/new_quote">
-            <Button variant="contained" color="warning">
+            <Button variant="contained" className='my-2' color="warning">
               Add Quote
             </Button>
           </Link>

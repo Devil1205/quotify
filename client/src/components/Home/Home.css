@@ -10,16 +10,16 @@
 .home > div{
     /* width: 90%; */
     padding: 10px;
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: auto;
-    font-family: 'Spirax', cursive;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
 }
 
 .randomQuote{
     /* width: fit-content; */
+    font-family: 'Spirax', cursive;
     margin: 50px auto;
     padding: 10px;
     background: #48485f;
@@ -31,10 +31,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    position: relative;
 }
 
-.randomQuote div{
+.randomQuote div:first-child{
     font-size: 50px;
+    margin: 15px 0px;
 }
 
 .randomQuote h2{
