@@ -10,10 +10,13 @@ app.use(cors({
 }))
 app.use(express.json());
 
-app.use(require('./routes/addQuote'));
-app.use(require('./routes/getQuote'));
-app.use(require('./routes/updateQuote'));
-app.use(require('./routes/deleteQuote'));
+app.use(require('./routes/quote/addQuote'));
+app.use(require('./routes/quote/getQuote'));
+app.use(require('./routes/quote/updateQuote'));
+app.use(require('./routes/quote/deleteQuote'));
+app.use(require('./routes/user/createUser'));
+app.use(require('./routes/user/loginUser'));
+app.use(require('./routes/user/verifyUser'));
 
 app.listen(port,()=>{
     console.log("Listening on port 5000");

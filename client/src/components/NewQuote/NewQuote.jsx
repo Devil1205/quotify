@@ -27,10 +27,11 @@ function NewQuote({ base_URL }) {
                 author: e.target.author.value,
                 description: e.target.description.value
             });
-            console.log(data);
+            const authToken = !localStorage.getItem('auth-token')?"":JSON.parse(localStorage.getItem('auth-token')).token;
+            // console.log(authToken);
             const save = await fetch(base_URL + "/quotifyAPI/quote", {
                 method: "POST",
-                headers: { "Content-type": "application/json" },
+                headers: { "Content-type": "application/json","auth-token": authToken},
                 body: data,
             })
             console.log(save);
@@ -40,7 +41,7 @@ function NewQuote({ base_URL }) {
                 setMessage("Sorry coudn't submit your quote.")
             setTimeout(() => {
                 setMessage("");
-            }, 2000);
+            }, 4000);
         }
         catch (e) {
             console.log(e);

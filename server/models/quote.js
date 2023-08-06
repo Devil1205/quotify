@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const QuoteSchema = mongoose.Schema(
     {
+        user:{
+            type: mongoose.Schema.ObjectId,
+            ref: "User"
+        },
         author: {
             type: String,
             required: true,

@@ -5,10 +5,11 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function UpdateQuote({ base_URL }) {
 
+    const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
     const location = useLocation();
@@ -30,19 +31,21 @@ function UpdateQuote({ base_URL }) {
                 author: e.target.author.value,
                 description: e.target.description.value
             });
-            // console.log(data);
-            const save = await fetch(base_URL + "/quotifyAPI/quote/" + location.state.quote._id, {
+            const authToken = !localStorage.getItem('auth-token')?"":JSON.parse(localStorage.getItem('auth-token')).token;
+            const response = await fetch(base_URL + "/quotifyAPI/quote/" + location.state.quote._id, {
                 method: "PATCH",
-                headers: { "Content-type": "application/json" },
+                headers: { "Content-type": "application/json","auth-token": authToken },
                 body: data,
             })
-            // console.log(save);
-            if (save.status === 200)
+            const responseJson = await response.json();
+            // console.log(response);
+            if (response.status === 200)
                 setMessage("This quote was updated successfully.")
             else
                 setMessage("Sorry couldn't updated this quote.")
             setTimeout(() => {
                 setMessage("");
+                navigate('/my_quotes');
             }, 2000);
         }
         catch (e) {
