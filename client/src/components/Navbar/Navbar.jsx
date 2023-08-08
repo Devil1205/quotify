@@ -3,7 +3,7 @@ import './Navbar.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function Navbar({ verifyUser }) {
+function Navbar({ verifyUser, message, updateMessage }) {
 
     const [user, setUser] = useState(false);
     const navigate = useNavigate();
@@ -22,11 +22,15 @@ function Navbar({ verifyUser }) {
     const logoutUser = ()=>{
         localStorage.removeItem('auth-token');
         setUser(false);
+        updateMessage("success","Logged out successfully")
     }
 
     const location = useLocation();
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+            <div className='message'>
+                {message && <div className={`alert alert-${message.type==='success'?message.type:"danger"}`} role='alert'>{`${message.type} : ${message.message}`}</div>}
+            </div>
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">Quotify</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

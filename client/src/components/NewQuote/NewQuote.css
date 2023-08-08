@@ -4,6 +4,7 @@
     min-height: calc(100vh - 80px);
     align-items: center;
     justify-content: center;
+    background: linear-gradient(45deg, black, transparent);
     /* background-color: aqua; */
 }
 

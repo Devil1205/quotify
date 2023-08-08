@@ -15,6 +15,14 @@ function App() {
   const base_URL = "https://quotifyapi.onrender.com";
   // const base_URL = "http://localhost:5000";
   const [showNavbar, setShowNavbar] = useState(true);
+  const [message, setMessage] = useState("");
+  const updateMessage = (type,message)=>{
+    setMessage({type,message});
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
+  }
+  //Check valid user using authtoken
   const verifyUser = async ()=>{
     try {
       const authToken = !localStorage.getItem('auth-token')?"":JSON.parse(localStorage.getItem('auth-token')).token;
@@ -35,14 +43,14 @@ function App() {
 
   return (
     <Router>
-      {showNavbar && <Navbar base_URL={base_URL} verifyUser={verifyUser}/>}
+      {showNavbar && <Navbar base_URL={base_URL} verifyUser={verifyUser} message={message} updateMessage={updateMessage} />}
       <Routes>
         <Route exact path="/" element={<Home base_URL={base_URL}/>} />
-        <Route exact path="/user" element={<SignupSignin base_URL={base_URL} setShowNavbar={setShowNavbar} showNavbar={showNavbar}/>} />
+        <Route exact path="/user" element={<SignupSignin base_URL={base_URL} setShowNavbar={setShowNavbar} showNavbar={showNavbar} message={message} updateMessage={updateMessage}/>} />
         <Route exact path="/quotes" element={<AllQuotes base_URL={base_URL} />} />
-        <Route exact path="/my_quotes" element={<MyQuotes base_URL={base_URL} />} />
-        <Route exact path="/new_quote" element={<NewQuote base_URL={base_URL} />} />
-        <Route exact path="/update" element={<UpdateQuote base_URL={base_URL} />} />
+        <Route exact path="/my_quotes" element={<MyQuotes base_URL={base_URL} updateMessage={updateMessage}/>} />
+        <Route exact path="/new_quote" element={<NewQuote base_URL={base_URL} updateMessage={updateMessage}/>} />
+        <Route exact path="/update" element={<UpdateQuote base_URL={base_URL} updateMessage={updateMessage}/>} />
       </Routes>
     </Router>
   )

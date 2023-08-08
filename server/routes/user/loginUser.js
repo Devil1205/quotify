@@ -14,7 +14,7 @@ router.post('/quotifyAuthAPI/login',
         //Return if email or phone not unique
         try {
             //checking user credentials
-            console.log(req.body);
+            // console.log(req.body);
             let user = await User.findOne({ email: req.body.email });
             if (!user) {
                 return res.status(400).json({ error: "Invalid email/password" });

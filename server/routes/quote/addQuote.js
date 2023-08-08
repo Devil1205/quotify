@@ -17,7 +17,7 @@ router.post('/quotifyAPI/quote', fetchUser, [
     //if same quote already exists
     const isUnique = await Quote.find({ description: req.body.description });
     if (isUnique.length !== 0) {
-        return res.status(400).send("Sorry this quote already exists.");
+        return res.status(400).json({error:"Sorry this quote already exists"});
     }
 
     const quote = new Quote({
@@ -26,7 +26,7 @@ router.post('/quotifyAPI/quote', fetchUser, [
         user: req.user.id,
     });
     await quote.save();
-    return res.send(req.body);
+    return res.json({message: "Quote added successfully"});
 })
 
 module.exports = router;

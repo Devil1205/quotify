@@ -6,9 +6,7 @@ import { styled } from '@mui/system';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function NewQuote({ base_URL }) {
-
-    const [message, setMessage] = useState("");
+function NewQuote({ base_URL , updateMessage}) {
 
     const saveQuote = async (e) => {
         e.preventDefault();
@@ -34,14 +32,12 @@ function NewQuote({ base_URL }) {
                 headers: { "Content-type": "application/json","auth-token": authToken},
                 body: data,
             })
-            console.log(save);
+            const saveJson = await save.json();
+            // console.log(saveJson);
             if (save.status === 200)
-                setMessage("Your quote was successfully submitted.")
+                updateMessage("success","Your quote was successfully submitted")
             else
-                setMessage("Sorry coudn't submit your quote.")
-            setTimeout(() => {
-                setMessage("");
-            }, 4000);
+                updateMessage("error",saveJson.error);
         }
         catch (e) {
             console.log(e);
@@ -104,6 +100,7 @@ function NewQuote({ base_URL }) {
         <div className='newQuote'>
             <div className='container'>
                 <Box component="form" id='quoteForm' method='POST' onSubmit={(e) => { saveQuote(e) }}>
+                <div className='bg-white' style={{padding: "10px", borderRadius: "20px"}}>
                     <TextField
                         required
                         id="author"
@@ -113,11 +110,11 @@ function NewQuote({ base_URL }) {
                         fullWidth
                     />
                     <StyledTextarea aria-label="empty textarea" id='description' placeholder="Write a quote" margin='normal' required />
+                    </div>
                     <Button variant="contained" color="success" className='my-2' type='submit'>
                         Submit
                     </Button>
                 </Box>
-            <div className="message text-center">{message}</div>
             </div>
         </div>
     )

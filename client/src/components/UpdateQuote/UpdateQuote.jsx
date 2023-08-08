@@ -7,10 +7,9 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function UpdateQuote({ base_URL }) {
+function UpdateQuote({ base_URL , updateMessage}) {
 
     const navigate = useNavigate();
-    const [message, setMessage] = useState("");
 
     const location = useLocation();
 
@@ -40,11 +39,10 @@ function UpdateQuote({ base_URL }) {
             const responseJson = await response.json();
             // console.log(response);
             if (response.status === 200)
-                setMessage("This quote was updated successfully.")
+                updateMessage("success","This quote was updated successfully");
             else
-                setMessage("Sorry couldn't updated this quote.")
+                updateMessage("error",responseJson.error);
             setTimeout(() => {
-                setMessage("");
                 navigate('/my_quotes');
             }, 2000);
         }
@@ -109,6 +107,7 @@ function UpdateQuote({ base_URL }) {
         <div className='newQuote'>
             <div className='container'>
                 <Box component="form" id='quoteForm' method='POST' onSubmit={(e) => { saveQuote(e) }}>
+                    <div className='bg-white' style={{padding: "10px", borderRadius: "20px"}}>
                     <TextField
                         required
                         id="author"
@@ -118,11 +117,11 @@ function UpdateQuote({ base_URL }) {
                         fullWidth
                     />
                     <StyledTextarea aria-label="empty textarea" id='description' defaultValue={location.state.quote.description} placeholder="Write a quote" margin='normal' required />
+                    </div>
                     <Button variant="contained" color="success" className='my-2' type='submit'>
                         Update
                     </Button>
                 </Box>
-            <div className="message text-center">{message}</div>
             </div>
         </div>
     )

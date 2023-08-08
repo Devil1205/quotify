@@ -202,3 +202,28 @@ form .btn input[type="submit"] {
   font-weight: 500;
   cursor: pointer;
 }
+
+.loginMessage {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+.backButton {
+  position: absolute;
+  top: 50px;
+  height: 50px;
+  background: #ffffff30;
+  left: 25px;
+  width: 50px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: brightness(0.8);
+}
+
+.backButton:hover{
+  background: #b9b9b930;
+}

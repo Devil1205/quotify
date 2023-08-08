@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
 
-function MyQuotes({ base_URL }) {
+function MyQuotes({ base_URL, updateMessage }) {
     const navigate = useNavigate();
 
     const scrollToTop = () => {
@@ -20,15 +20,18 @@ function MyQuotes({ base_URL }) {
 
     const getQuotes = async () => {
         try {
-            const authToken = !localStorage.getItem('auth-token')?"":JSON.parse(localStorage.getItem('auth-token')).token;
+            const authToken = !localStorage.getItem('auth-token') ? "" : JSON.parse(localStorage.getItem('auth-token')).token;
             const data = await fetch(base_URL + "/quotifyAPI/myQuotes", {
                 method: "GET",
                 headers: { "Content-type": "application/json", "auth-token": authToken },
             });
+            const dataJson = await data.json();
             if (data.status === 200) {
-                const dataJson = await data.json();
                 // console.log(dataJson);
                 setQuotes(dataJson);
+            }
+            else {
+                 updateMessage("error",dataJson.error);
             }
         }
         catch (error) {
@@ -62,7 +65,16 @@ function MyQuotes({ base_URL }) {
                 method: "DELETE",
                 headers: { "Content-type": "application/json", "auth-token": authToken },
             })
-            getQuotes();
+            const responseJson = await response.json();
+            if(response.status===200)
+            {
+                updateMessage("success","Quote deleted successfully");
+                getQuotes();
+            }
+            else
+            {
+                updateMessage("error", responseJson.error);
+            }
             // console.log(response);
         }
         catch (error) {
@@ -96,7 +108,7 @@ function MyQuotes({ base_URL }) {
                 })}
                 <div className='text-center'>
                     <Button variant="contained" disabled={page === 1} onClick={prevPage} color="success" className='mx-2'>Prev</Button>
-                    <Button variant="contained" disabled={page === Math.ceil(quotes.length / pageSize)} onClick={nextPage} color="success" className='mx-2'>Next</Button>
+                    <Button variant="contained" disabled={page === Math.max(Math.ceil(quotes.length / pageSize), 1)} onClick={nextPage} color="success" className='mx-2'>Next</Button>
                 </div>
             </div>
         </div>

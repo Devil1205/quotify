@@ -47,7 +47,7 @@ function Quotes({ base_URL }) {
                 })}
                 <div className='text-center'>
                     <Button variant="contained" disabled={page === 1} onClick={prevPage} color="success" className='mx-2'>Prev</Button>
-                    <Button variant="contained" disabled={page === Math.ceil(quotes.length / pageSize)} onClick={nextPage} color="success" className='mx-2'>Next</Button>
+                    <Button variant="contained" disabled={page === Math.max(Math.ceil(quotes.length / pageSize),1)} onClick={nextPage} color="success" className='mx-2'>Next</Button>
                 </div>
             </div>
         </div>

@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './Main.css'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function User({ base_URL, setShowNavbar, showNavbar }) {
+function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
     const navigate = useNavigate();
-    const [message, setMessage] = useState("");
-    const updateMessage = () => { setTimeout(() => { setMessage("") }, 4000) };
     let loginText;
     let loginForm;
-    let signupBtn;
     //form display and navbar hide front end code
     useEffect(() => {
         setShowNavbar(false);
         loginText = document.querySelector(".title-text .login");
         loginForm = document.querySelector("form.login");
-        signupBtn = document.querySelector("label.signup");
         return () => {
             setShowNavbar(true);
         }
@@ -39,10 +36,13 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
                 })
             //Navigate user to his account if credentials are correct
             const responseJson = await response.json();
-            console.log(responseJson);
+            // console.log(responseJson);
             if (response.status === 200) {
                 localStorage.setItem('auth-token', JSON.stringify({ user: responseJson.user.name, token: responseJson.authToken }));
                 navigate('/');
+            }
+            else {
+                updateMessage("error", responseJson.error);
             }
             // console.log(responseJson);
         }
@@ -72,11 +72,13 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
                     body: JSON.stringify(data),
                     headers: { "content-type": "application/json" }
                 })
+            const responseJson = await response.json();
             if (response.status === 200) {
-                setMessage("User Created Successfully. Kindly login.");
-                updateMessage();
+                updateMessage("success", "User Created Successfully, kindly login");
             }
-            // const responseJson = await response.json();
+            else {
+                updateMessage("error", responseJson.error);
+            }
             // console.log(response);
         }
         catch (error) {
@@ -86,6 +88,10 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
 
     return (
         <div className="user">
+            <div className="backButton" onClick={()=>{navigate(-1)}}><ArrowBackIcon fontSize='large' sx={{ color: "white" }} /></div>
+            <div className='loginMessage'>
+                {message && <div className={`alert alert-${message.type==='success'?message.type:"danger"}`} role='alert'>{`${message.type} : ${message.message}`}</div>}
+            </div>
             <div className="wrapper">
                 <div className="title-text">
                     <div className="title login">Login Form</div>
@@ -99,7 +105,7 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
                             loginForm.style.marginLeft = "0%";
                             loginText.style.marginLeft = "0%";
                         }}>Login</label>
-                        <label htmlFor="signup" className="slide signup" onClick={() => {
+                        <label htmlFor="signup" id='slideToSignup' className="slide signup" onClick={() => {
                             loginForm.style.marginLeft = "-50%";
                             loginText.style.marginLeft = "-50%";
                         }}>Signup</label>
@@ -118,9 +124,6 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
                                 <div className="btn-layer"></div>
                                 <input type="submit" id='login' value="Login" />
                             </div>
-                            <div className="signup-link">Not a member? <Link to="/" onClick={() => {
-                                signupBtn.click()
-                            }}>Signup now</Link></div>
                         </form>
                         <form className="signup" onSubmit={(e) => { registerUser(e) }}>
                             <div className="field">
@@ -139,7 +142,6 @@ function User({ base_URL, setShowNavbar, showNavbar }) {
                                 <div className="btn-layer"></div>
                                 <input id='register' type="submit" value="Signup" />
                             </div>
-                            <div className='text-center my-2 text-success'>{message}</div>
                         </form>
                     </div>
                 </div>

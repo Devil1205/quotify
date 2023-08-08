@@ -31,15 +31,15 @@ async (req,res)=>{
         return res.status(400).json(errors);
     }
 
-    //Return if email or phone not unique
-    // if(await User.findOne({email: req.body.email}))
-    // {
-    //     return res.status(400).json({error: "Email already exists."})
-    // }
-    // if(await User.findOne({phone: req.body.phone}))
-    // {
-    //     return res.status(400).json({error: "Phone number already exists."})
-    // }
+    // Return if email or phone not unique
+    if(await User.findOne({email: req.body.email}))
+    {
+        return res.status(400).json({error: "Email already exists"})
+    }
+    if(await User.findOne({phone: req.body.phone}))
+    {
+        return res.status(400).json({error: "Phone number already exists"})
+    }
 
     //Hash password
     const salt = await bcrypt.genSalt(5);
@@ -52,10 +52,10 @@ async (req,res)=>{
         phone: req.body.phone,
         password: secPass,
     })
-    console.log(user);
+    // console.log(user);
     try{
         await user.save();
-        res.status(200).json("User registered successfully.");
+        res.status(200).json({message:"User registered successfully"});
     }
     catch(e){
         res.status(500).json({error: "Internal server error"});
