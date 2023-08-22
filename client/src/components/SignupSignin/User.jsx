@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Main.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
     const navigate = useNavigate();
+    const location = useLocation();
     let loginText;
     let loginForm;
     //form display and navbar hide front end code
@@ -86,11 +87,12 @@ function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
         }
     }
 
+
     return (
         <div className="user">
-            <div className="backButton" onClick={()=>{navigate(-1)}}><ArrowBackIcon fontSize='large' sx={{ color: "white" }} /></div>
+            <div className="backButton" onClick={() => { navigate(-1) }}><ArrowBackIcon fontSize='large' sx={{ color: "white" }} /></div>
             <div className='loginMessage'>
-                {message && <div className={`alert alert-${message.type==='success'?message.type:"danger"}`} role='alert'>{`${message.type} : ${message.message}`}</div>}
+                {message && <div className={`alert alert-${message.type === 'success' ? message.type : "danger"}`} role='alert'>{`${message.type} : ${message.message}`}</div>}
             </div>
             <div className="wrapper">
                 <div className="title-text">
@@ -119,7 +121,7 @@ function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
                             <div className="field">
                                 <input type="password" placeholder="Password" required />
                             </div>
-                            <div className="pass-link"><Link to="/">Forgot password?</Link></div>
+                            <div className="pass-link"><Link to="/forgotPassword">Forgot password?</Link></div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
                                 <input type="submit" id='login' value="Login" />

@@ -17,6 +17,7 @@ app.use(require('./routes/quote/deleteQuote'));
 app.use(require('./routes/user/createUser'));
 app.use(require('./routes/user/loginUser'));
 app.use(require('./routes/user/verifyUser'));
+app.use(require('./routes/user/forgotPassword'));
 
 app.listen(port,()=>{
     console.log("Listening on port 5000");
