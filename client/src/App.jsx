@@ -14,8 +14,8 @@ import ForgotPassword from './components/SignupSignin/ForgotPassword';
 
 function App() {
 
-  // const base_URL = "https://quotifyapi.onrender.com";
-  const base_URL = "https://lonely-suspenders-ray.cyclic.app";
+  const base_URL = "https://quotifyapi.onrender.com";
+  // const base_URL = "https://lonely-suspenders-ray.cyclic.app";
   // const base_URL = "http://localhost:5000";
   const [showNavbar, setShowNavbar] = useState(true);
   const [message, setMessage] = useState("");
