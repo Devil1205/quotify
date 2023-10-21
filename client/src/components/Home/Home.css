@@ -2,7 +2,7 @@
 
 .home{
     min-height: calc(100vh - 80px);
-    background: linear-gradient(45deg, black, transparent);
+    background: #000023;
     display: flex;
     align-items: center;
 }
@@ -22,7 +22,7 @@
     font-family: 'Spirax', cursive;
     margin: 50px auto;
     padding: 10px;
-    background: #48485f;
+    background: #cfcfcf21;
     border-radius: 13px;
     box-shadow: 5px 7px 9px 0px black;
     color: white;
