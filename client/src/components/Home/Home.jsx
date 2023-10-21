@@ -29,21 +29,21 @@ function Home({base_URL}) {
           <h2>~ {quote.author}</h2>
         </div>
         <div className="quoteButtons text-center">
-          <Button className='me-2 my-2' variant="contained" color="success" onClick={getRandomQuote}>
+          <Button className='me-2 my-2' variant="contained" color="success" onClick={getRandomQuote} style={{borderRadius: "50px"}}>
             Another Quote
           </Button>
           <Link to="/quotes">
-            <Button variant="contained" className='me-2 my-2' color="primary">
+            <Button variant="contained" className='me-2 my-2' color="primary" style={{borderRadius: "50px"}}>
               All Quotes
             </Button>
           </Link>
           <Link to="/new_quote">
-            <Button variant="contained" className='me-2 my-2' color="warning">
+            <Button variant="contained" className='me-2 my-2' color="warning" style={{borderRadius: "50px"}}>
               Add Quote
             </Button>
           </Link>
           <Link to="/my_quotes">
-            <Button variant="contained" className='my-2' color="error">
+            <Button variant="contained" className='my-2' color="error" style={{borderRadius: "50px"}}>
               My Quotes
             </Button>
           </Link>
