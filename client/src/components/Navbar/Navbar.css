@@ -1,9 +1,16 @@
 .navbar {
     min-height: 80px;
-    background-color: #080e3d;
     position: sticky;
     top: 0px;
     z-index: 2;
+}
+
+.navbar-light{
+    background-color: #e5e8ff;
+}
+
+.navbar-dark{
+    background-color: #080e3d;
 }
 
 .profile {
@@ -20,9 +27,6 @@
     /* font-size: 20px; */
 }
 
-.navbar a {
-    color: white !important;
-}
 
 .navbar-toggler {
     filter: invert(1);
@@ -31,7 +35,6 @@
 }
 
 .slidingMenu {
-    background-color: #080e3d;;
     position: fixed;
     height: 100vh;
     width: 55%;
@@ -41,6 +44,14 @@
     z-index: 2;
     max-width: 250px;
     min-width: 170px;
+}
+
+.slidingMenu-light{
+    background-color: #e8ebff;
+}
+
+.slidingMenu-dark{
+    background-color: #080e3d;;
 }
 
 .boxShadow {
