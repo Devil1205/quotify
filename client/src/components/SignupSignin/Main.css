@@ -229,3 +229,7 @@ form .btn input[type="submit"] {
 .backButton:hover{
   background: #b9b9b930;
 }
+
+.oauthLoginBtns>:first-child{
+  margin-bottom: 10px;
+}

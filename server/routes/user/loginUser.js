@@ -94,12 +94,12 @@ router.get(
   "/quotifyAuthAPI/github/callback",
   passport.authenticate("github", {
     session: false,
-    failureRedirect: "http://localhost:5173/#/user",
+    failureRedirect: "https://quotify1234.netlify.app/#/user",
   }),
   (req, res) => {
     const { token } = req.user;
     const user = JSON.stringify(req.user.user);
-    res.redirect(`http://localhost:5173/#/?token=${token}&user=${user}`);
+    res.redirect(`https://quotify1234.netlify.app/#/?token=${token}&user=${user}`);
   }
 );
 

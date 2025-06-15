@@ -3,9 +3,8 @@ import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({ base_URL }) => {
   const navigate = useNavigate();
-  const base_URL = "https://quotifyapi.onrender.com";
 
   const handleSuccess = async (credentialResponse) => {
     const googleToken = credentialResponse.credential;
