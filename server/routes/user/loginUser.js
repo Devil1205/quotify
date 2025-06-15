@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt_secret = process.env.JWT_SECRET;
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
+const passport = require("passport");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -81,5 +82,25 @@ router.post("/quotifyAuthAPI/google", async (req, res) => {
     res.status(400).json({ message: "Google token verification failed" });
   }
 });
+
+// GitHub login
+router.get(
+  "/quotifyAuthAPI/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+// GitHub callback
+router.get(
+  "/quotifyAuthAPI/github/callback",
+  passport.authenticate("github", {
+    session: false,
+    failureRedirect: "http://localhost:5173/#/user",
+  }),
+  (req, res) => {
+    const { token } = req.user;
+    const user = JSON.stringify(req.user.user);
+    res.redirect(`http://localhost:5173/#/?token=${token}&user=${user}`);
+  }
+);
 
 module.exports = router;

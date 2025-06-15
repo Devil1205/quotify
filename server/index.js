@@ -2,13 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
+const passport = require("passport");
 
 require('./db/connectDB');
+require("./config/passport");
 
 app.use(cors({
     origin:'*'
 }))
 app.use(express.json());
+app.use(passport.initialize());
 
 app.use(require('./routes/quote/addQuote'));
 app.use(require('./routes/quote/getQuote'));

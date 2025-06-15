@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Main.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import GoogleLoginButton from './GoogleLoginButton';
+import GithubLoginButton from './GithubLoginButton';
 
 function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
     const navigate = useNavigate();
@@ -97,6 +98,7 @@ function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
             </div>
             <div className="wrapper">
             <GoogleLoginButton />
+            <GithubLoginButton />
                 <div className="title-text">
                     <div className="title login">Login Form</div>
                     <div className="title signup">Signup Form</div>

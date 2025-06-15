@@ -1,28 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const User = mongoose.Schema({
-    name:{
-        type: "string",
-        required: true
+  name: {
+    type: "string",
+    required: true,
+  },
+  email: {
+    type: "string",
+    required: true,
+    unique: true,
+  },
+  phone: {
+    type: "Number",
+    required: function () {
+      return this.googleId || this.githubId ? false : true;
     },
-    email:{
-        type: "string",
-        required: true,
-        unique: true,
+    unique: true,
+  },
+  googleId: String,
+  githubId: String,
+  password: {
+    type: "string",
+    required: function () {
+      return this.googleId || this.githubId ? false : true;
     },
-    phone:{
-        type: "Number",
-        required: function(){
-            return this.googleId ? false : true;
-        },
-        unique: true,
-    },
-    googleId: String,
-    password:{
-        type: "string",
-        required: function(){
-            return this.googleId ? false : true;
-        }
-    }
+  },
 });
 
-module.exports = mongoose.model("User",User);
+module.exports = mongoose.model("User", User);
