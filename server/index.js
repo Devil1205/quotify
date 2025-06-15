@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
-require('./db/connectDB')
+require('./db/connectDB');
 
 app.use(cors({
     origin:'*'

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Main.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import GoogleLoginButton from './GoogleLoginButton';
 
 function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
     const navigate = useNavigate();
@@ -95,6 +96,7 @@ function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
                 {message && <div className={`alert alert-${message.type === 'success' ? message.type : "danger"}`} role='alert'>{`${message.type} : ${message.message}`}</div>}
             </div>
             <div className="wrapper">
+            <GoogleLoginButton />
                 <div className="title-text">
                     <div className="title login">Login Form</div>
                     <div className="title signup">Signup Form</div>

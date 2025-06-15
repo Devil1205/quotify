@@ -11,12 +11,17 @@ const User = mongoose.Schema({
     },
     phone:{
         type: "Number",
-        required: true,
+        required: function(){
+            return this.googleId ? false : true;
+        },
         unique: true,
     },
+    googleId: String,
     password:{
         type: "string",
-        required: true
+        required: function(){
+            return this.googleId ? false : true;
+        }
     }
 });
 
