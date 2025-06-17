@@ -4,6 +4,7 @@ import "./Main.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import GoogleLoginButton from "./GoogleLoginButton";
 import GithubLoginButton from "./GithubLoginButton";
+import MicrosoftLoginButton from "./MicrosoftLoginButton";
 
 function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
   const navigate = useNavigate();
@@ -113,6 +114,7 @@ function User({ base_URL, setShowNavbar, showNavbar, message, updateMessage }) {
         <div className="oauthLoginBtns">
           <GoogleLoginButton base_URL={base_URL} />
           <GithubLoginButton base_URL={base_URL} />
+          <MicrosoftLoginButton base_URL={base_URL} />
         </div>
         <div className="title-text">
           <div className="title login">Login Form</div>

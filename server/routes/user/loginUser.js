@@ -88,7 +88,6 @@ router.get(
   "/quotifyAuthAPI/github",
   passport.authenticate("github", { scope: ["user:email"] })
 );
-
 // GitHub callback
 router.get(
   "/quotifyAuthAPI/github/callback",
@@ -99,6 +98,22 @@ router.get(
   (req, res) => {
     const { token } = req.user;
     const user = JSON.stringify(req.user.user);
+    res.redirect(
+      `https://quotify1234.netlify.app/#/?token=${token}&user=${user}`
+    );
+  }
+);
+
+// Microsoft login
+router.get("/quotifyAuthAPI/microsoft", passport.authenticate("microsoft"));
+// Microsoft callback
+router.get(
+  "/quotifyAuthAPI/microsoft/callback",
+  passport.authenticate("microsoft", { session: false }),
+  (req, res) => {
+    const { token } = req.user;
+    const user = JSON.stringify(req.user.user);
+    // Redirect to frontend with token
     res.redirect(`https://quotify1234.netlify.app/#/?token=${token}&user=${user}`);
   }
 );

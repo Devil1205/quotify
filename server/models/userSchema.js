@@ -12,16 +12,17 @@ const User = mongoose.Schema({
   phone: {
     type: "Number",
     required: function () {
-      return this.googleId || this.githubId ? false : true;
+      return this.googleId || this.githubId || this.microsoftId ? false : true;
     },
     unique: true,
   },
   googleId: String,
   githubId: String,
+  microsoftId: String,
   password: {
     type: "string",
     required: function () {
-      return this.googleId || this.githubId ? false : true;
+      return this.googleId || this.githubId || this.microsoftId ? false : true;
     },
   },
 });
