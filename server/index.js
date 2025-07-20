@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 const passport = require("passport");
+const rateLimiter = require('./middleware/rateLimiter');
 
 require('./db/connectDB');
 require("./config/passport");
@@ -12,6 +13,7 @@ app.use(cors({
 }))
 app.use(express.json());
 app.use(passport.initialize());
+app.use(rateLimiter(5,10));
 
 app.use(require('./routes/quote/addQuote'));
 app.use(require('./routes/quote/getQuote'));

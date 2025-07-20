@@ -3,6 +3,7 @@ const router = express.Router();
 const Quote = require('../../models/quote');
 const { body, validationResult } = require('express-validator');
 const fetchUser = require('../../middleware/fetchUser');
+const { redis } = require('../../db/connectDB');
 
 router.post('/quotifyAPI/quote', fetchUser, [
     body('author',"Name must be atleast 6 characters").isLength({ min: 6 }),
@@ -26,6 +27,9 @@ router.post('/quotifyAPI/quote', fetchUser, [
         user: req.user.id,
     });
     await quote.save();
+    await redis.del('quotes');
+    await redis.del(`quotes:${req.user.id}`); 
+
     return res.json({message: "Quote added successfully"});
 })
 
