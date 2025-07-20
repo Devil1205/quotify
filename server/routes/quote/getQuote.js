@@ -15,7 +15,7 @@ router.get('/quotifyAPI/', async (req, res) => {
 router.get('/quotifyAPI/quotes',async (req,res)=>{
     const cachedQuotes = await redis.get('quotes');
     if(cachedQuotes){
-        return res.json({quote: JSON.parse(cachedQuotes)});
+        return res.json(JSON.parse(cachedQuotes));
     }
     const quote = await Quote.find();
     redis.set('quotes',JSON.stringify(quote));
@@ -28,7 +28,7 @@ router.get('/quotifyAPI/myQuotes',fetchUser,async (req,res)=>{
         const userId = req.user.id;
         const cachedQuotes = await redis.get(`quotes:${userId}`);
         if(cachedQuotes){
-            return res.status(200).json({data: JSON.parse(cachedQuotes)});
+            return res.status(200).json(JSON.parse(cachedQuotes));
         }
         const data = await Quote.find({user: userId});
         await redis.set(`quotes:${userId}`,JSON.stringify(data));
